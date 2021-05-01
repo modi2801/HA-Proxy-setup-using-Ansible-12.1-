@@ -1,0 +1,47 @@
+- hosts: [lb]
+  tasks:
+  - name: "Installing HA Proxy software"
+    package:
+      name: "haproxy"
+      state: present
+
+  - name: "Copying the configuration file of HA Proxy"
+    template:
+      src: "haproxy.cfg"
+      dest: "/etc/haproxy/haproxy.cfg"
+
+  - name: "Starting HA Proxy Service"
+    service:
+      name: "haproxy"
+      state: "started"
+
+
+
+- hosts: [webserver]
+  tasks:
+  - name: "install httpd"
+    package:
+      name: "httpd"
+      state: "present"
+
+  - name: "install php"
+    package:
+      name: "php"
+      state: "present"
+
+  - name: "copy the webpage content"
+    template:
+      src: "index.html"
+      dest: "/var/www/html/index.html"
+
+  - name: "starting httpd service"
+    service:
+      name: "httpd"
+      state: "started"
+
+  - name: "Enable firewall for httpd"
+    firewalld:
+      port: 80/tcp
+      state: enabled
+      permanent: yes
+      immediate: yes
