@@ -6,5 +6,5 @@ Project Objectives:
  The complete article is posted on medium: 
  https://yassshhhmodi.medium.com/ha-proxy-setup-using-ansible-525a72090404
  
- Hope you liked it.
+ Hope you like it.
  Thank You
